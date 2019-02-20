@@ -16,7 +16,7 @@ public class Car implements Serializable {
     private Long id;
     
     final private String manufacturer;
-//    final private String name;
+    final private String model;
     final private Integer purchasePrice;
     final private Integer manufactureYear;
     final private CarSize type;
@@ -28,11 +28,13 @@ public class Car implements Serializable {
     public Car() {
         purchasePrice = null;
         manufacturer = null;
+        model = null;
         manufactureYear = null;
         type = null;
     }
     
-    public Car(Integer purchasePrice, String manufacturer, Integer manufactureYear, CarSize type) {
+    public Car(String model, Integer purchasePrice, String manufacturer, Integer manufactureYear, CarSize type) {
+        this.model = model;
         this.purchasePrice = purchasePrice;
         this.manufacturer = manufacturer;
         this.manufactureYear = manufactureYear;
@@ -46,6 +48,10 @@ public class Car implements Serializable {
     
     
     
+    
+    public String getModel() {
+        return model;
+    }
     
     public String getManufacturer() {
         return manufacturer;
