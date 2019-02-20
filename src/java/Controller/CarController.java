@@ -3,54 +3,42 @@ package Controller;
 import Entities.Car;
 import Entities.CarSize;
 import dao.CarDao;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
-import javax.persistence.Persistence;
 
+@ManagedBean
 @RequestScoped
 public class CarController {
     
+    private List<Car> cars;
+    private String manufacturer;
+    private String model;
+    private Integer purchasePrice;
+    private Integer manufactureYear;
+    private CarSize type;
+    
+
     @Inject
     CarDao dao;
-//    CarDao dao = new MockCarDao();
+    
+    
+    public void submit() {
+        add(new Car(model, purchasePrice, manufacturer, manufactureYear, type));
+        updateList();
+    }
+    
+    @PostConstruct
+    void updateList() {
+        cars = getAll();
+    }
     
 //    Car get(Long id){}
-    
+
     public List<Car> getAll() {
         return dao.getAll();
-    }
-    public List<Car> getAllBySize(CarSize size){
-        return dao.getAll()
-                .stream()
-                .filter(c ->  c.getType().equals(size))
-                .collect(Collectors.toList());
-    }
-    public List<Car> getAllByModel(String model){
-        return dao.getAll()
-                .stream()
-                .filter(c -> c.getModel().toLowerCase().contains(model.toLowerCase()))
-                .collect(Collectors.toList());
-    }
-    public List<Car> getAllByManufacturer(String manufacturer){
-        return dao.getAll()
-                .stream()
-                .filter(c -> c.getManufacturer().toLowerCase().contains(manufacturer.toLowerCase()))
-                .collect(Collectors.toList());
-    }
-    public List<Car> getAllByPrice(int min, int max){
-        return dao.getAll()
-                .stream()
-                .filter(c -> c.getCurrentBidPrice() >= min && c.getCurrentBidPrice() <= max)
-                .collect(Collectors.toList());
-    }
-    public List<Car> getAllByManufactureYear(int min, int max){
-        return dao.getAll()
-                .stream()
-                .filter(c -> c.getManufactureYear() >= min && c.getManufactureYear() <= max)
-                .collect(Collectors.toList());
     }
     
     // Tries to place a bid, returns true/false depending on if the bid's gone through.
@@ -70,32 +58,73 @@ public class CarController {
     public void delete(Car car){
         dao.delete(car);
     }
-}
+    
+    public List<Car> getAllBySize(CarSize size){
+        return dao.getAllBySize(size);
+    }
+    public List<Car> getAllByModel(String model){
+        return dao.getAllByModel(model);
+    }
+    public List<Car> getAllByManufacturer(String manufacturer){
+        return dao.getAllByManufacturer(manufacturer);
+    }
+    public List<Car> getAllBySalePrice(int min, int max){
+        return dao.getAllBySalePrice(min, max);
+    }
+    public List<Car> getAllByCurrentBid(int min, int max){
+        return dao.getAllByCurrentBid(min, max);
+    }
+    public List<Car> getAllByManufactureYear(int min, int max){
+        return dao.getAllByManufactureYear(min, max);
+    }
 
-class MockCarDao extends CarDao {
-    
-    private ArrayList<Car> list = new ArrayList<>();
-    
-    public void create(Car car){
-        list.add(car);
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public Integer getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public void setPurchasePrice(Integer purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
+    public Integer getManufactureYear() {
+        return manufactureYear;
+    }
+
+    public void setManufactureYear(Integer manufactureYear) {
+        this.manufactureYear = manufactureYear;
+    }
+
+    public CarSize getType() {
+        return type;
+    }
+
+    public void setType(CarSize type) {
+        this.type = type;
     }
     
-    public void update(Car car){
-        //TODO
-    }
     
-    public void delete(Car car){
-        list.remove(car);
-    }
-    
-    public Car get(Long id){
-        for (Car car : list) {
-            if (car.getId().equals(id))
-                return car;
-        }
-        return null;
-    }
-    public List<Car> getAll(){
-        return list;
-    }
 }
