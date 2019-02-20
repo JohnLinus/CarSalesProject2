@@ -2,11 +2,11 @@ package dao;
 
 import Entities.Car;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+@Stateless
 public class CarDao {
     
     @PersistenceContext
@@ -24,10 +24,10 @@ public class CarDao {
         em.remove(car);
     }
     
-    public Car retrieve(Long id){
+    public Car get(Long id){
         return em.find(Car.class, id);
     }
-    public List<Car> retrieveAll(){
+    public List<Car> getAll(){
         return em.createQuery("SELECT e FROM Car e").getResultList();
     }
 }

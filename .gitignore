@@ -1,3 +1,4 @@
 /nbproject/private/
 src/conf/persistence.xml
 web/WEB-INF/glassfish-resources.xml
+/build/

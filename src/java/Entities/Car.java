@@ -21,6 +21,7 @@ public class Car implements Serializable {
     final private Integer manufactureYear;
     final private CarSize type;
     
+    
     private int salePrice;
     private int currentBidPrice;
     private LocalDateTime currentBidTime;
@@ -111,7 +112,7 @@ public class Car implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Car[ id=" + id + " ]";
+        return "Car{" + "id=" + id + ", manufacturer=" + manufacturer + ", model=" + model + ", purchasePrice=" + purchasePrice + ", manufactureYear=" + manufactureYear + ", type=" + type + ", salePrice=" + salePrice + ", currentBidPrice=" + currentBidPrice + ", currentBidTime=" + currentBidTime + '}';
     }
     
 }
