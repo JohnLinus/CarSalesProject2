@@ -1,14 +1,13 @@
 package Entities;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Car implements Serializable {
+public class Car implements Serializable, Sellable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -22,10 +21,6 @@ public class Car implements Serializable {
     final private CarSize type;
     
     
-    private int valuation;
-    private int currentBidPrice;
-    private LocalDateTime currentBidTime;
-
     public Car() {
         purchasePrice = null;
         manufacturer = null;
@@ -42,13 +37,10 @@ public class Car implements Serializable {
         this.type = type;
     }
     
-    public void setCurrentBid(int bid) {
-        currentBidPrice = bid;
-        currentBidTime = LocalDateTime.now();
+    @Override
+    public String getInfo() {
+        return toString();
     }
-    
-    
-    
     
     public String getModel() {
         return model;
@@ -70,18 +62,6 @@ public class Car implements Serializable {
         return type;
     }
 
-    public int getValuation() {
-        return valuation;
-    }
-
-    public int getCurrentBidPrice() {
-        return currentBidPrice;
-    }
-
-    public LocalDateTime getCurrentBidTime() {
-        return currentBidTime;
-    }
-    
     public Long getId() {
         return id;
     }
@@ -112,7 +92,7 @@ public class Car implements Serializable {
 
     @Override
     public String toString() {
-        return "Car{" + "id=" + id + ", manufacturer=" + manufacturer + ", model=" + model + ", purchasePrice=" + purchasePrice + ", manufactureYear=" + manufactureYear + ", type=" + type + ", salePrice=" + valuation + ", currentBidPrice=" + currentBidPrice + ", currentBidTime=" + currentBidTime + '}';
+        return "Car{" + "id=" + id + ", manufacturer=" + manufacturer + ", model=" + model + ", purchasePrice=" + purchasePrice + ", manufactureYear=" + manufactureYear + ", type=" + type + '}';
     }
     
 }

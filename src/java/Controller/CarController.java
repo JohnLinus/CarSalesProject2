@@ -3,6 +3,7 @@ package Controller;
 import Entities.Car;
 import Entities.CarSize;
 import dao.CarDao;
+import java.util.Arrays;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -26,6 +27,11 @@ public class CarController {
     
     
     public void submit() {
+        for (Object o : Arrays.asList(manufacturer, model, purchasePrice, manufactureYear, type)) {
+            if (o == null)
+                return;
+        }
+        
         add(new Car(model, purchasePrice, manufacturer, manufactureYear, type));
         updateList();
     }
@@ -39,16 +45,6 @@ public class CarController {
 
     public List<Car> getAll() {
         return dao.getAll();
-    }
-    
-    // Tries to place a bid, returns true/false depending on if the bid's gone through.
-    public boolean placeBid(Car car, int bid){
-        if (car.getCurrentBidPrice() < bid) {
-            car.setCurrentBid(bid);
-            dao.update(car);
-            return true;
-        }
-        return false;
     }
     
     public void add(Car car){

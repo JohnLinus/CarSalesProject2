@@ -22,7 +22,7 @@
 
                 <h:outputText value="Type " />
                 <h:selectOneMenu value="#{carController.type}">
-                    <f:selectItem itemValue = "MINI" itemLabel = "Mini" /> 
+                    <f:selectItem itemValue = "MINI" itemLabel = "Mini" />
                     <f:selectItem itemValue = "COMBI" itemLabel = "Combi" />
                     <f:selectItem itemValue = "PICKUP" itemLabel = "Pickup" />
                     <f:selectItem itemValue = "TRUCK" itemLabel = "Truck" />
@@ -41,8 +41,6 @@
                 <p:column headerText="MANUFACTURE YEAR">#{c.manufactureYear}</p:column>
                 <p:column headerText="TYPE">#{c.type}</p:column>
                 <p:column headerText="PURCHASE PRICE">#{c.purchasePrice}</p:column>
-                <p:column headerText="SALE PRICE">#{c.valuation}</p:column>
-                <p:column headerText="CURRENT BID">#{c.currentBidPrice}#{c.currentBidTime}</p:column>
             </p:dataTable>
         </h:form>
     </h:body>
