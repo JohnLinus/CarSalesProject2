@@ -12,16 +12,16 @@
             <h:panelGrid columns="2">
 
                 <h:outputText value="Model " />
-                <h:inputText value="#{carController.model}"/>
+                <h:inputText value="#{webCarController.model}"/>
 
                 <h:outputText value="Manufacturer " />
-                <h:inputText value="#{carController.manufacturer}"/>
+                <h:inputText value="#{webCarController.manufacturer}"/>
 
                 <h:outputText value="ManufactureYear " />
-                <h:inputText value="#{carController.manufactureYear}"/>
+                <h:inputText value="#{webCarController.manufactureYear}"/>
 
                 <h:outputText value="Type " />
-                <h:selectOneMenu value="#{carController.type}">
+                <h:selectOneMenu value="#{webCarController.type}">
                     <f:selectItem itemValue = "MINI" itemLabel = "Mini" />
                     <f:selectItem itemValue = "COMBI" itemLabel = "Combi" />
                     <f:selectItem itemValue = "PICKUP" itemLabel = "Pickup" />
@@ -29,13 +29,13 @@
                 </h:selectOneMenu>
 
                 <h:outputText value="PurchasePrice " />
-                <h:inputText value="#{carController.purchasePrice}"/>
+                <h:inputText value="#{webCarController.purchasePrice}"/>
 
-                <h:commandButton value="SUBMIT" action="#{carController.submit}"/>
+                <h:commandButton value="SUBMIT" action="#{webCarController.submit}"/>
 
 
             </h:panelGrid>
-            <p:dataTable value="#{carController.cars}" var="c">
+            <p:dataTable value="#{webCarController.cars}" var="c">
                 <p:column headerText="MODEL">#{c.model}</p:column>
                 <p:column headerText="MANUFACTURER">#{c.manufacturer}</p:column>
                 <p:column headerText="MANUFACTURE YEAR">#{c.manufactureYear}</p:column>

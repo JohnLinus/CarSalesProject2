@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Car implements Serializable, Sellable {
@@ -19,6 +20,9 @@ public class Car implements Serializable, Sellable {
     final private Integer purchasePrice;
     final private Integer manufactureYear;
     final private CarSize type;
+    
+    @OneToOne
+    private Auction auction;
     
     
     public Car() {
