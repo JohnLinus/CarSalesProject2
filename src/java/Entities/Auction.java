@@ -3,10 +3,12 @@ package Entities;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalInt;
 import javafx.util.Pair;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,16 +28,21 @@ public class Auction implements Serializable {
 //    private final User owner;
     
     @OneToOne
-    private final Sellable item;
+    private final Car item;
     
-    @ManyToMany(targetEntity = User.class)
-    private HashMap<LocalDateTime, Pair<User, Integer>> bids;
+    @ManyToMany(targetEntity = User.class, fetch = FetchType.LAZY)
+    private Map<LocalDateTime, Pair<User, Integer>> bids = new HashMap<>();
     
     private int reservationPrice;
     private int valuedPrice;
     
     public Auction() {
         item = null;
+    }
+    
+    public Auction(Car item) {
+        this.item = item;
+        end = LocalDateTime.now().plusDays(7);
     }
     
     public void bid(LocalDateTime time, User user, int bid) {
@@ -72,7 +79,7 @@ public class Auction implements Serializable {
         return item;
     }
 
-    public HashMap<LocalDateTime, Pair<User, Integer>> getBids() {
+    public Map<LocalDateTime, Pair<User, Integer>> getBids() {
         return bids;
     }
 

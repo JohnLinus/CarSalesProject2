@@ -18,6 +18,10 @@ public class UserDao {
                 .getResultList();
     }
     
+    public User get(Long id) {
+        return em.find(User.class, id);
+    }
+    
     public void create(User user) {
         em.persist(user);
     }

@@ -73,6 +73,11 @@ public class Car implements Serializable, Sellable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    public void setAuction(Auction auction) {
+        if (auction.getItem().equals(this))
+            this.auction = auction;
+    }
 
     @Override
     public int hashCode() {

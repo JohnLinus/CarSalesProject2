@@ -6,8 +6,10 @@ import dao.AuctionDao;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+@Stateless
 public class AuctionController {
     
     @Inject
