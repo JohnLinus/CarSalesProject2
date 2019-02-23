@@ -36,8 +36,13 @@
 
             </h:panelGrid>
             <p:dataTable value="#{carController.cars}" var="c">
-                <p:column headerText="ID">#{c.id}</p:column>
                 <p:column headerText="MODEL">#{c.model}</p:column>
+                <p:column headerText="MANUFACTURER">#{c.manufacturer}</p:column>
+                <p:column headerText="MANUFACTURE YEAR">#{c.manufactureYear}</p:column>
+                <p:column headerText="TYPE">#{c.type}</p:column>
+                <p:column headerText="PURCHASE PRICE">#{c.purchasePrice}</p:column>
+                <p:column headerText="SALE PRICE">#{c.valuation}</p:column>
+                <p:column headerText="CURRENT BID">#{c.currentBidPrice}#{c.currentBidTime}</p:column>
             </p:dataTable>
         </h:form>
     </h:body>

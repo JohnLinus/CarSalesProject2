@@ -22,7 +22,7 @@ public class Car implements Serializable {
     final private CarSize type;
     
     
-    private int salePrice;
+    private int valuation;
     private int currentBidPrice;
     private LocalDateTime currentBidTime;
 
@@ -70,8 +70,8 @@ public class Car implements Serializable {
         return type;
     }
 
-    public int getSalePrice() {
-        return salePrice;
+    public int getValuation() {
+        return valuation;
     }
 
     public int getCurrentBidPrice() {
@@ -112,7 +112,7 @@ public class Car implements Serializable {
 
     @Override
     public String toString() {
-        return "Car{" + "id=" + id + ", manufacturer=" + manufacturer + ", model=" + model + ", purchasePrice=" + purchasePrice + ", manufactureYear=" + manufactureYear + ", type=" + type + ", salePrice=" + salePrice + ", currentBidPrice=" + currentBidPrice + ", currentBidTime=" + currentBidTime + '}';
+        return "Car{" + "id=" + id + ", manufacturer=" + manufacturer + ", model=" + model + ", purchasePrice=" + purchasePrice + ", manufactureYear=" + manufactureYear + ", type=" + type + ", salePrice=" + valuation + ", currentBidPrice=" + currentBidPrice + ", currentBidTime=" + currentBidTime + '}';
     }
     
 }
