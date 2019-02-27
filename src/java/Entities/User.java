@@ -1,18 +1,26 @@
 package Entities;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User implements Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    
+    private String name;
+    private String phone;
+    private String address;
+    
+    @OneToMany
+    private List<Bid> bids;
     
     public User(){}
 
@@ -22,28 +30,70 @@ public class User implements Serializable {
         this.address = address;
     }
     
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    
-    @ManyToMany(targetEntity = Auction.class, fetch = FetchType.LAZY)
-    private Map<LocalDateTime, Auction> bids = new HashMap<>();
     
     
-    private String name;
-    private String phone;
-    private String address;
     
-    public void bid(LocalDateTime time, Auction auction) {
-        bids.put(time, auction);
+    public void addBid(Bid bid) {
+        bids.add(bid);
+        bid.setUser(this);
     }
     
-    public Map<LocalDateTime, Auction> getBids() {
-        return bids;
+    public void removeBid(Bid bid) {
+        bids.remove(bid);
+        bid.setUser(null);
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    // Getters and Setters
+
     public Long getId() {
         return id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public List<Bid> getBids() {
+        return bids;
+    }
+
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
+    }
+    
+    
+    
+    
 }

@@ -28,6 +28,7 @@ public class CarDao {
     public Car get(Long id){
         return em.find(Car.class, id);
     }
+    
     public List<Car> getAll(){
         return em.createQuery("SELECT e FROM Car e").getResultList();
     }

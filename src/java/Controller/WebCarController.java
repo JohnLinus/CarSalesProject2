@@ -6,12 +6,12 @@ import dao.CarDao;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.inject.Named;
 
-@ManagedBean
-@RequestScoped
+@Named(value = "webCarController")
+@Stateless
 public class WebCarController {
     
     private List<Car> cars;
@@ -121,6 +121,4 @@ public class WebCarController {
     public void setType(CarSize type) {
         this.type = type;
     }
-    
-    
 }

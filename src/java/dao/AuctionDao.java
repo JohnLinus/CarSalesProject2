@@ -31,5 +31,8 @@ public class AuctionDao {
         em.find(Auction.class, auction.getId()).bid(time, user, bid);
         em.find(User.class, user.getId()).bid(time, auction);
     }
-    
+
+    public Auction get(Long id) {
+        return em.find(Auction.class, id);
+    }
 }
