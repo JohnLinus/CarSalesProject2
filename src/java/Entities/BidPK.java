@@ -1,19 +1,24 @@
 package Entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class BidPK implements Serializable {
     
+    
+    private Long id;
     private Long auction;
-    private Long user;
+    private Long bidder;
     
     public BidPK(){}
 
-    public BidPK(Long auction, Long user) {
+    public BidPK(Long auction, Long bidder, Long id) {
         this.auction = auction;
-        this.user = user;
+        this.bidder = bidder;
+        this.id = id;
     }
+
     
     
     
@@ -27,21 +32,28 @@ public class BidPK implements Serializable {
         this.auction = auction;
     }
 
-    public Long getUser() {
-        return user;
+    public Long getBidder() {
+        return bidder;
     }
 
-    public void setUser(Long user) {
-        this.user = user;
+    public void setBidder(Long bidder) {
+        this.bidder = bidder;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
-    // Misc
+    
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.auction);
-        hash = 29 * hash + Objects.hashCode(this.user);
+        hash = 29 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -57,14 +69,14 @@ public class BidPK implements Serializable {
             return false;
         }
         final BidPK other = (BidPK) obj;
-        if (!Objects.equals(this.auction, other.auction)) {
-            return false;
-        }
-        if (!Objects.equals(this.user, other.user)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
+
+
+    
     
     
     

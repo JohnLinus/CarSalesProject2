@@ -3,6 +3,7 @@ package Controller;
 import Entities.Car;
 import Entities.CarSize;
 import dao.CarDao;
+import dao.ItemDao;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -23,7 +24,7 @@ public class WebCarController {
     
 
     @Inject
-    CarDao dao;
+    ItemDao dao;
     
     
     public void submit() {
@@ -44,7 +45,7 @@ public class WebCarController {
 //    Car get(Long id){}
 
     public List<Car> getAll() {
-        return dao.getAll();
+        return dao.getAll(Car.class);
     }
     
     public void add(Car car){
@@ -56,22 +57,16 @@ public class WebCarController {
     }
     
     public List<Car> getAllBySize(CarSize size){
-        return dao.getAllBySize(size);
+        return dao.getCarBySize(size);
     }
     public List<Car> getAllByModel(String model){
-        return dao.getAllByModel(model);
+        return dao.getCarByModel(model);
     }
     public List<Car> getAllByManufacturer(String manufacturer){
-        return dao.getAllByManufacturer(manufacturer);
-    }
-    public List<Car> getAllBySalePrice(int min, int max){
-        return dao.getAllBySalePrice(min, max);
-    }
-    public List<Car> getAllByCurrentBid(int min, int max){
-        return dao.getAllByCurrentBid(min, max);
+        return dao.getCarByManufacturer(manufacturer);
     }
     public List<Car> getAllByManufactureYear(int min, int max){
-        return dao.getAllByManufactureYear(min, max);
+        return dao.getCarByManufactureYear(min, max);
     }
 
     public List<Car> getCars() {

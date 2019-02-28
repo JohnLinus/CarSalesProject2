@@ -6,8 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 public class Car implements Serializable {
     
     @Id
@@ -94,5 +96,8 @@ public class Car implements Serializable {
         this.auction = auction;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Car{" + "manufacturer=" + manufacturer + ", model=" + model + ", purchasePrice=" + purchasePrice + ", manufactureYear=" + manufactureYear + ", size=" + size + ", auction=" + auction + '}';
+    }    
 }

@@ -2,17 +2,21 @@ package Entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 public class Auction implements Serializable {
 
     @Id
@@ -27,16 +31,31 @@ public class Auction implements Serializable {
     @OneToOne(optional = false)
     private Car item;
     
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Bid> bids;
+
+    public Auction(LocalDateTime timeOfEnd, int reservationPrice, Car item) {
+        this.timeOfEnd = timeOfEnd;
+        this.reservationPrice = reservationPrice;
+        this.item = item;
+    }
+
+    public Auction() {
+    }
+    
+    
     
     
     public void addBid(Bid bid) {
+        if (bids == null)
+            bids = new ArrayList<>();
         bids.add(bid);
         bid.setAuction(this);
     }
     
     public void removeBid(Bid bid) {
+        if (bids == null)
+            return;
         bids.remove(bid);
         bid.setAuction(null);
     }
@@ -46,15 +65,17 @@ public class Auction implements Serializable {
         return reservationPrice <= getHighestBid();
     }
     
-    public LocalDateTime getLatestBid() {
-        Optional<LocalDateTime> temp = bids.stream()
-                .map(b -> b.getTime())
-                .max((t1, t2) -> t1.compareTo(t2));
-        
-        return (temp.isPresent()) ? temp.get() : null;
-    }
+//    public LocalDateTime getLatestBid() {
+//        Optional<LocalDateTime> temp = bids.stream()
+//                .map(b -> b.getTimeOfBid())
+//                .max((t1, t2) -> t1.compareTo(t2));
+//        
+//        return (temp.isPresent()) ? temp.get() : null;
+//    }
     
     public int getHighestBid() {
+        if (bids == null)
+            return -1;
         OptionalInt max = bids.stream()
                         .mapToInt(b -> b.getAmount())
                         .max();

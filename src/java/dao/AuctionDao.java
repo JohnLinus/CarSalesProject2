@@ -1,7 +1,7 @@
 package dao;
 
 import Entities.Auction;
-import Entities.User;
+import Entities.Bidder;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -27,9 +27,7 @@ public class AuctionDao {
         em.persist(auction);
     }
     
-    public void addBid(LocalDateTime time, Auction auction, User user, int bid) {
-        em.find(Auction.class, auction.getId()).bid(time, user, bid);
-        em.find(User.class, user.getId()).bid(time, auction);
+    public void addBid(LocalDateTime time, Auction auction, Bidder user, int bid) {
     }
 
     public Auction get(Long id) {

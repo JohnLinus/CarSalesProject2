@@ -1,6 +1,6 @@
 package Controller;
 
-import Entities.User;
+import Entities.Bidder;
 import dao.UserDao;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -12,15 +12,15 @@ public class UserController {
     @Inject
     UserDao dao;
     
-    public void add(User user) {
+    public void add(Bidder user) {
         dao.create(user);
     }
     
-    public List<User> get(String username) {
+    public List<Bidder> get(String username) {
         return dao.getByUserName(username);
     }
 
-    public User get(Long id) {
+    public Bidder get(Long id) {
         return dao.get(id);
     }
 }

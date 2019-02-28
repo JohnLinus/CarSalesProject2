@@ -1,6 +1,6 @@
 package dao;
 
-import Entities.User;
+import Entities.Bidder;
 import Entities.Auction;
 import Entities.Bid;
 import Entities.Car;
@@ -20,7 +20,7 @@ public class ItemDao {
     EntityManager em;
     
     private final Map<Class, String> getAllMap = new HashMap<>();
-    private final Class[] acceptedClasses = {Car.class, Auction.class, User.class, Bid.class};
+    private final Class[] acceptedClasses = {Car.class, Auction.class, Bidder.class, Bid.class};
     
     private final String USER_NAME = "SELECT e FROM User e WHERE e.name like :name";
     
@@ -123,7 +123,7 @@ public class ItemDao {
      * @param name name to search for
      * @return list of all users with given name
      */
-    public List<User> getUserByName(String name) {
+    public List<Bidder> getUserByName(String name) {
         return em.createQuery(USER_NAME)
                 .setParameter("name", name)
                 .getResultList();

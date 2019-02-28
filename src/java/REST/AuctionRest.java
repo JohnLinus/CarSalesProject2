@@ -2,7 +2,7 @@ package REST;
 
 import Controller.AuctionController;
 import Entities.Auction;
-import Entities.User;
+import Entities.Bidder;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -52,7 +52,7 @@ public class AuctionRest {
     @Path("/{auctionId}/{bid}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Boolean bid(User user, @PathParam("auctionId") Long auctionId, @PathParam("bid") int bid) {
+    public Boolean bid(Bidder user, @PathParam("auctionId") Long auctionId, @PathParam("bid") int bid) {
         return ac.bid(getAuction(auctionId), user, bid);
     }
     

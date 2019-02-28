@@ -2,16 +2,24 @@ package Entities;
 
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 @IdClass(BidPK.class)
 public class Bid {
     
     private int amount;
-    private LocalDateTime time;
+    private LocalDateTime timeOfBid;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
     
     @Id
     @ManyToOne
@@ -19,15 +27,16 @@ public class Bid {
     
     @Id
     @ManyToOne
-    private User user;
+    private Bidder bidder;
 
     public Bid() {
     }
 
-    public Bid(int amount, LocalDateTime time) {
+    public Bid(int amount) {
         this.amount = amount;
-        this.time = time;
+        timeOfBid = LocalDateTime.now();
     }
+
     
     
     
@@ -43,12 +52,12 @@ public class Bid {
         this.amount = amount;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public LocalDateTime getTimeOfBid() {
+        return timeOfBid;
     }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setTimeOfBid(LocalDateTime timeOfBid) {
+        this.timeOfBid = timeOfBid;
     }
 
     public Auction getAuction() {
@@ -59,12 +68,12 @@ public class Bid {
         this.auction = auction;
     }
 
-    public User getUser() {
-        return user;
+    public Bidder getBidder() {
+        return bidder;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setBidder(Bidder bidder) {
+        this.bidder = bidder;
     }
     
     

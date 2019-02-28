@@ -1,15 +1,19 @@
 package Entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-public class User implements Serializable {
+@XmlRootElement
+public class Bidder implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,12 +23,12 @@ public class User implements Serializable {
     private String phone;
     private String address;
     
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Bid> bids;
     
-    public User(){}
+    public Bidder(){}
 
-    public User(String name, String phone, String address) {
+    public Bidder(String name, String phone, String address) {
         this.name = name;
         this.phone = phone;
         this.address = address;
@@ -34,13 +38,17 @@ public class User implements Serializable {
     
     
     public void addBid(Bid bid) {
+        if (bids == null)
+            bids = new ArrayList<>();
         bids.add(bid);
-        bid.setUser(this);
+        bid.setBidder(this);
     }
     
     public void removeBid(Bid bid) {
+        if (bids == null)
+            return;
         bids.remove(bid);
-        bid.setUser(null);
+        bid.setBidder(null);
     }
     
     

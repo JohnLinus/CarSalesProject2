@@ -1,7 +1,7 @@
 package Controller;
 
 import Entities.Auction;
-import Entities.User;
+import Entities.Bidder;
 import dao.AuctionDao;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,19 +38,8 @@ public class AuctionController {
                 .collect(Collectors.toList());
     }
     
-    public boolean bid(Auction auction, User user, int bid) {
-        LocalDateTime now = LocalDateTime.now();
-        
-        while (auction.getBids().containsKey(now) || user.getBids().containsKey(now))
-            now = now.plusNanos(1);
-        
-        if (        now.isAfter(auction.getTimeOfEnd()) // if auction has ended
-                ||  auction.getHighestBid() >= bid  // if given bid is high enough
-                ||  auction.getBids().get(auction.getLatestBid()).getKey().equals(user))  // if the auctions highest bidder is user
-            return false;
-        
-        dao.addBid(now, auction, user, bid);
-        return true;
+    public boolean bid(Auction auction, Bidder user, int bid) {
+        return false;
     }
 
     public Auction get(Long id) {
