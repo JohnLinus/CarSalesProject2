@@ -2,6 +2,7 @@ package REST;
 
 import Entities.Bidder;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -62,6 +63,8 @@ public class BidderWrapper implements Serializable {
     }
 
     public List<Long> getBids() {
+        if(bids == null)
+            return new ArrayList<>();
         return bids;
     }
 

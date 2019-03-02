@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class AuctionWrapper {
+    private Auction original;
     
     private Long id;
     private LocalDateTime timeOfEnd;
@@ -20,6 +21,7 @@ public class AuctionWrapper {
     }
 
     public AuctionWrapper(Auction a) {
+        original = a;
         this.id = a.getId();
         this.timeOfEnd = a.getTimeOfEnd();
         this.reservationPrice = a.getReservationPrice();
@@ -28,6 +30,9 @@ public class AuctionWrapper {
         if(a.getBids() != null)
             this.bids = a.getBids().stream().map(b -> b.getId()).collect(Collectors.toList());
     }
+    
+    
+    
 
     public Long getId() {
         return id;

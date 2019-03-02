@@ -1,5 +1,6 @@
 package Entities;
 
+import REST.AuctionWrapper;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -7,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,7 +42,9 @@ public class Auction implements Serializable {
     }
     
     
-    
+    public AuctionWrapper wrap() {
+        return new AuctionWrapper(this);
+    }
 
     public void setItem(Car item) {
         if (item.getAuction() != null)
@@ -80,6 +82,16 @@ public class Auction implements Serializable {
                 .max((t1, t2) -> t1.compareTo(t2));
         
         return (temp.isPresent()) ? temp.get() : null;
+    }
+    
+    public Bidder getLatestBidder() {
+        if (bids == null)
+            return null;
+        
+        Optional<Bid> temp = bids.stream()
+                .max((t1, t2) -> t1.getTimeOfBid().compareTo(t2.getTimeOfBid()));
+        
+        return (temp.isPresent()) ? temp.get().getBidder() : null;
     }
     
     public int getHighestBid() {

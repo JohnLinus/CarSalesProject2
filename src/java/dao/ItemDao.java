@@ -24,14 +24,14 @@ public class ItemDao {
     
     private final String BIDDER_NAME = "SELECT e FROM Bidder e WHERE e.name like :name";
     
-    private final String CAR_SIZE = "SELECT c FROM Car c WHERE c.type = :size";
+    private final String CAR_SIZE = "SELECT c FROM Car c WHERE c.size = :size";
     private final String CAR_MODEL = "SELECT c FROM Car c WHERE c.model LIKE CONCAT('%',:model,'%')";
     private final String CAR_MANUFACTURER = "SELECT c FROM Car c WHERE c.manufacturer LIKE CONCAT('%',:manufacturer,'%')";
     private final String CAR_MANUFACTURE_YEAR_BETWEEN = "SELECT c FROM Car c WHERE c.manufactureYear BETWEEN :min AND :max";
-    private final String CAR_HAS_AUCTION = "SELECT c FROM Car c, Auction a WHERE a.item = c";
-    private final String CAR_HAS_NO_AUCTION = "SELECT c FROM Car c, Auction a WHERE NOT a.item = c";
+    private final String CAR_HAS_AUCTION = "SELECT c FROM Car c WHERE NOT c.auction IS NULL";
+    private final String CAR_HAS_NO_AUCTION = "SELECT c FROM Car c WHERE c.auction IS NULL";
     
-    private final String AUCTION_HIGHEST_BID_BETWEEN = "SELECT a FROM Auction a, Bid b WHERE b.auction LIKE a AND b.amount BETWEEN :min AND :max GROUP BY MAX(b.amount)";
+//    private final String AUCTION_HIGHEST_BID_BETWEEN = "SELECT a FROM Auction a, Bid b WHERE b.auction = a AND b.amount BETWEEN :min AND :max"; // GROUP BY MAX(b.amount)";
     private final String AUCTION_END_TIME_BETWEEN = "SELECT a FROM Auction a WHERE a.timeOfEnd BETWEEN :min AND :max";
     private final String AUCTION_NOT_SOLD = "SELECT a FROM Auction a WHERE a.timeOfEnd > :now";
     private final String AUCTION_SOLD = "SELECT a FROM Auction a WHERE a.timeOfEnd <= :now";
@@ -184,17 +184,19 @@ public class ItemDao {
                 .getResultList();
     }
     
-    /**
-     * Searches through database for sold/not sold auctions with a highest bid between min and max.
-     * @param min
-     * @param max
-     * @param sold
-     * @return 
-     */
-    public List<Auction> getAuctionByHighestBid(int min, int max, boolean sold) {
-        return em.createQuery(AUCTION_HIGHEST_BID_BETWEEN)
-                .getResultList();
-    }
+//    /**
+//     * Searches through database for sold/not sold auctions with a highest bid between min and max.
+//     * @param min
+//     * @param max
+//     * @param sold
+//     * @return 
+//     */
+//    public List<Auction> getAuctionByHighestBid(int min, int max, boolean sold) {
+//        return em.createQuery(AUCTION_HIGHEST_BID_BETWEEN)
+//                .setParameter("min", min)
+//                .setParameter("max", max)
+//                .getResultList();
+//    }
     
     /**
      * Searches through database for sold or not sold auctions
