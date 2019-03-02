@@ -52,8 +52,8 @@ public class AuctionRest {
     @Path("/{auctionId}/{bid}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Boolean bid(Bidder user, @PathParam("auctionId") Long auctionId, @PathParam("bid") int bid) {
-        return ac.bid(getAuction(auctionId), user, bid);
+    public Boolean bid(Bidder bidder, @PathParam("auctionId") Long auctionId, @PathParam("bid") int bid) {
+        return ac.bid(getAuction(auctionId), bidder, bid);
     }
     
 }

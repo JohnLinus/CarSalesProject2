@@ -22,7 +22,7 @@ public class ItemDao {
     private final Map<Class, String> getAllMap = new HashMap<>();
     private final Class[] acceptedClasses = {Car.class, Auction.class, Bidder.class, Bid.class};
     
-    private final String USER_NAME = "SELECT e FROM User e WHERE e.name like :name";
+    private final String BIDDER_NAME = "SELECT e FROM Bidder e WHERE e.name like :name";
     
     private final String CAR_SIZE = "SELECT c FROM Car c WHERE c.type = :size";
     private final String CAR_MODEL = "SELECT c FROM Car c WHERE c.model LIKE CONCAT('%',:model,'%')";
@@ -97,7 +97,6 @@ public class ItemDao {
         em.remove(o);
     }
     
-    // getAll car, auction, user
     /**
      * Retrieve a List of every entity of class oClass from database.
      * 
@@ -118,13 +117,13 @@ public class ItemDao {
     
     
     /**
-     * Searches through database for users with given name
+     * Searches through database for bidders with given name
      * 
      * @param name name to search for
-     * @return list of all users with given name
+     * @return list of all bidders with given name
      */
-    public List<Bidder> getUserByName(String name) {
-        return em.createQuery(USER_NAME)
+    public List<Bidder> getBidderByName(String name) {
+        return em.createQuery(BIDDER_NAME)
                 .setParameter("name", name)
                 .getResultList();
     }

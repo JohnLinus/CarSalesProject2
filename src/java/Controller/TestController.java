@@ -33,7 +33,7 @@ public class TestController {
 //    public <T> List<T> getAll(Class<T> oClass) {
 //        
 //    }
-//    public List<Bidder> getUserByName(String name) {
+//    public List<Bidder> getBidderByName(String name) {
 //        
 //    }
 //    public List<Car> getCarBySize(CarSize size) {

@@ -27,31 +27,36 @@ public class TestRest {
     ItemDao dao;
     
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 //    @Produces(MediaType.APPLICATION_XML)
 //    @Consumes(MediaType.APPLICATION_JSON)
-    public void test() {
+    public CarWrapper test() {
         
         dao.create(new Car("test", 9000, "test2", 1999, CarSize.MINI));
         dao.create(new Bidder("test1", "test2", "test3"));
-        dao.create(new Auction(LocalDateTime.MIN, 1000, dao.get(Car.class, 1L)));
+        dao.create(new Auction(LocalDateTime.MIN, 1000));
         
         Auction a = dao.get(Auction.class, 3L);
         Bidder b = dao.get(Bidder.class, 2L);
         Car c = dao.get(Car.class, 1L);
+        a.setItem(c);
+        
         bid(a, b, 100);
+        
+//        Bid bid = new Bid(200);
+//        dao.create(bid);
+//        a.addBid(bid);
+//        b.addBid(bid);
+        
+        return new CarWrapper(dao.get(Car.class, 1L));
+//        return b.toString();
     }
     
-    private void bid(Auction a, Bidder u, int amount) {
-        a = dao.get(Auction.class, a.getId());
-        u = dao.get(Bidder.class, u.getId());
+    private void bid(Auction a, Bidder b, int amount) {
+        Bid bid = new Bid(amount);
+        a.addBid(bid);
+        b.addBid(bid);
         
-        Bid b = new Bid(amount);
-        a.addBid(b);
-        u.addBid(b);
-        
-        dao.create(b);
-        dao.update(a);
-        dao.update(u);
+        dao.create(bid);
     }
 }

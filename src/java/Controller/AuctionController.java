@@ -38,7 +38,7 @@ public class AuctionController {
                 .collect(Collectors.toList());
     }
     
-    public boolean bid(Auction auction, Bidder user, int bid) {
+    public boolean bid(Auction auction, Bidder bidder, int bid) {
         return false;
     }
 

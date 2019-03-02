@@ -23,21 +23,19 @@ public class Auction implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-//    private User owner;
     private LocalDateTime timeOfEnd;
     private int reservationPrice;
     private int valuedPrice;
     
-    @OneToOne(optional = false)
+    @OneToOne
     private Car item;
     
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany
     private List<Bid> bids;
 
-    public Auction(LocalDateTime timeOfEnd, int reservationPrice, Car item) {
+    public Auction(LocalDateTime timeOfEnd, int reservationPrice) {
         this.timeOfEnd = timeOfEnd;
         this.reservationPrice = reservationPrice;
-        this.item = item;
     }
 
     public Auction() {
@@ -45,6 +43,14 @@ public class Auction implements Serializable {
     
     
     
+
+    public void setItem(Car item) {
+        if (item.getAuction() != null)
+            throw new IllegalArgumentException("Item is already connected to an auction");
+        
+        this.item = item;
+        item.setAuction(this);
+    }
     
     public void addBid(Bid bid) {
         if (bids == null)
@@ -65,31 +71,27 @@ public class Auction implements Serializable {
         return reservationPrice <= getHighestBid();
     }
     
-//    public LocalDateTime getLatestBid() {
-//        Optional<LocalDateTime> temp = bids.stream()
-//                .map(b -> b.getTimeOfBid())
-//                .max((t1, t2) -> t1.compareTo(t2));
-//        
-//        return (temp.isPresent()) ? temp.get() : null;
-//    }
+    public LocalDateTime getLatestBid() {
+        if (bids == null)
+            return LocalDateTime.MIN;
+        
+        Optional<LocalDateTime> temp = bids.stream()
+                .map(b -> b.getTimeOfBid())
+                .max((t1, t2) -> t1.compareTo(t2));
+        
+        return (temp.isPresent()) ? temp.get() : null;
+    }
     
     public int getHighestBid() {
         if (bids == null)
             return -1;
+        
         OptionalInt max = bids.stream()
                         .mapToInt(b -> b.getAmount())
                         .max();
         
         return (max.isPresent()) ? max.getAsInt() : -1;
     }
-//
-//    public Map<LocalDateTime, Integer> getAnonBids() {
-//        Map<LocalDateTime, Integer> map = new HashMap<>();
-//        for (LocalDateTime key : bids.keySet()) {
-//            map.put(key, bids.get(key).getValue());
-//        }
-//        return map;
-//    }
     
     
     
@@ -131,10 +133,6 @@ public class Auction implements Serializable {
 
     public Car getItem() {
         return item;
-    }
-
-    public void setItem(Car item) {
-        this.item = item;
     }
 
     public List<Bid> getBids() {
