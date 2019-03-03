@@ -20,7 +20,7 @@ public class Bid implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
     
     @Id
     @ManyToOne

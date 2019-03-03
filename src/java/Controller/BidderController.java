@@ -3,6 +3,7 @@ package Controller;
 import Entities.Bid;
 import Entities.Bidder;
 import REST.BidderWrapper;
+import dao.DaoFacade;
 import dao.ItemDao;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +14,7 @@ import javax.inject.Inject;
 public class BidderController {
     
     @Inject
-    ItemDao dao;
+    DaoFacade dao;
     
     public Bidder unwrap(BidderWrapper bw) {
         Bidder b = new Bidder();

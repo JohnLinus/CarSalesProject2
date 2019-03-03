@@ -14,7 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class ItemDao {
+public class ItemDao implements DaoFacade {
     
     @PersistenceContext
     EntityManager em;
@@ -58,6 +58,7 @@ public class ItemDao {
      * 
      * @exception IllegalArgumentException if o.class isn't an entity class.
      */
+    @Override
     public void create(Object o) {
         em.persist(o);
     }
@@ -71,6 +72,7 @@ public class ItemDao {
      * 
      * @exception IllegalArgumentException if oClass isn't an entity class.
      */
+    @Override
     public <T> T get(Class<T> oClass, Long id) {
         return em.find(oClass, id);
     }
@@ -82,6 +84,7 @@ public class ItemDao {
      * 
      * @exception IllegalArgumentException if o.class isn't an entity class.
      */
+    @Override
     public void update(Object o) {
         o = em.merge(o);
     }
@@ -93,6 +96,7 @@ public class ItemDao {
      * 
      * @exception IllegalArgumentException if o.class isn't an entity class.
      */
+    @Override
     public void delete(Object o) {
         em.remove(o);
     }
@@ -105,6 +109,7 @@ public class ItemDao {
      * 
      * @exception IllegalArgumentException if oClass isn't an entity class.
      */
+    @Override
     public <T> List<T> getAll(Class<T> oClass) {
         checkIfAccepted(oClass);
         return em.createQuery(getAllMap.get(oClass))
@@ -122,6 +127,7 @@ public class ItemDao {
      * @param name name to search for
      * @return list of all bidders with given name
      */
+    @Override
     public List<Bidder> getBidderByName(String name) {
         return em.createQuery(BIDDER_NAME)
                 .setParameter("name", name)
@@ -133,6 +139,7 @@ public class ItemDao {
      * @param size size to search for
      * @return 
      */
+    @Override
     public List<Car> getCarBySize(CarSize size) {
         return em.createQuery(CAR_SIZE)
                 .setParameter("size", size)
@@ -144,6 +151,7 @@ public class ItemDao {
      * @param model
      * @return 
      */
+    @Override
     public List<Car> getCarByModel(String model) {
         return em.createQuery(CAR_MODEL)
                 .setParameter("model", model)
@@ -155,6 +163,7 @@ public class ItemDao {
      * @param manufacturer
      * @return 
      */
+    @Override
     public List<Car> getCarByManufacturer(String manufacturer) {
         return em.createQuery(CAR_MANUFACTURER)
                 .setParameter("manufacturer", manufacturer)
@@ -167,6 +176,7 @@ public class ItemDao {
      * @param max
      * @return 
      */
+    @Override
     public List<Car> getCarByManufactureYear(int min, int max) {
         return em.createQuery(CAR_MANUFACTURE_YEAR_BETWEEN)
                 .setParameter("min", min)
@@ -179,6 +189,7 @@ public class ItemDao {
      * @param hasAuction 
      * @return 
      */
+    @Override
     public List<Car> getCarByHasAuction(boolean hasAuction) {
         return em.createQuery((hasAuction) ? CAR_HAS_AUCTION : CAR_HAS_NO_AUCTION)
                 .getResultList();
@@ -200,13 +211,14 @@ public class ItemDao {
     
     /**
      * Searches through database for sold or not sold auctions
-     * @param sold
+     * @param isSold
      * @return 
      */
-    public List<Auction> getAuctionBySold(boolean sold) {
+    @Override
+    public List<Auction> getAuctionBySold(boolean isSold) {
         LocalDateTime now = LocalDateTime.now();
         
-        return em.createQuery((sold) ? AUCTION_SOLD : AUCTION_NOT_SOLD)
+        return em.createQuery((isSold) ? AUCTION_SOLD : AUCTION_NOT_SOLD)
                 .setParameter("now", now)
                 .getResultList();
     }
@@ -217,6 +229,7 @@ public class ItemDao {
      * @param max latest date
      * @return
      */
+    @Override
     public List<Auction> getAuctionByEndTime(LocalDateTime min, LocalDateTime max) {
         return em.createQuery(AUCTION_END_TIME_BETWEEN)
                 .setParameter("min", min)

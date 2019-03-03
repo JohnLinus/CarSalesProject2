@@ -4,6 +4,7 @@ import Entities.Auction;
 import Entities.Bidder;
 import Entities.Car;
 import Entities.CarSize;
+import dao.DaoFacade;
 import dao.ItemDao;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,7 +15,7 @@ import javax.inject.Inject;
 public class TestController {
     
     @Inject
-    ItemDao dao;
+    DaoFacade dao;
     
     
     

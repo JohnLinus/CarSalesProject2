@@ -2,6 +2,7 @@ package Controller;
 
 import Entities.Car;
 import Entities.CarSize;
+import dao.DaoFacade;
 import dao.ItemDao;
 import java.io.Serializable;
 import java.util.List;
@@ -14,7 +15,7 @@ public class CarController implements Serializable {
     public CarController() {}
     
     @Inject
-    ItemDao dao;
+    DaoFacade dao;
     
     public void add(Car car) {
         dao.create(car);

@@ -94,6 +94,8 @@ public class Bidder implements Serializable {
     }
 
     public List<Bid> getBids() {
+        if (bids == null)
+            bids = new ArrayList<>();
         return bids;
     }
 

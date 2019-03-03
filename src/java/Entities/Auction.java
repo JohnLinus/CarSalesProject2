@@ -41,11 +41,6 @@ public class Auction implements Serializable {
     public Auction() {
     }
     
-    
-    public AuctionWrapper wrap() {
-        return new AuctionWrapper(this);
-    }
-
     public void setItem(Car item) {
         if (item.getAuction() != null)
             throw new IllegalArgumentException("Item is already connected to an auction");
@@ -68,14 +63,9 @@ public class Auction implements Serializable {
         bid.setAuction(null);
     }
     
-    
-    public boolean isBidsOverReservedPrice() {
-        return reservationPrice <= getHighestBid();
-    }
-    
     public LocalDateTime getLatestBid() {
         if (bids == null)
-            return LocalDateTime.MIN;
+            return null;
         
         Optional<LocalDateTime> temp = bids.stream()
                 .map(b -> b.getTimeOfBid())
@@ -96,13 +86,18 @@ public class Auction implements Serializable {
     
     public int getHighestBid() {
         if (bids == null)
-            return -1;
+            return 0;
         
         OptionalInt max = bids.stream()
                         .mapToInt(b -> b.getAmount())
                         .max();
         
         return (max.isPresent()) ? max.getAsInt() : -1;
+    }
+    
+    public boolean isReservedPriceMet() {
+        int x = getHighestBid();
+        return x > 0 && reservationPrice <= x;
     }
     
     
@@ -116,6 +111,8 @@ public class Auction implements Serializable {
     }
 
     public void setId(Long id) {
+        if(id == null)
+            throw new IllegalArgumentException();
         this.id = id;
     }
 
@@ -148,6 +145,8 @@ public class Auction implements Serializable {
     }
 
     public List<Bid> getBids() {
+        if(bids == null)
+            bids = new ArrayList<>();
         return bids;
     }
 

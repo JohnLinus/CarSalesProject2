@@ -5,6 +5,7 @@ import Entities.Bid;
 import Entities.Bidder;
 import Entities.Car;
 import Entities.CarSize;
+import dao.DaoFacade;
 import dao.ItemDao;
 import java.io.Serializable;
 import java.sql.Array;
@@ -27,7 +28,7 @@ import javax.ws.rs.core.MediaType;
 public class TestRest {
 
     @Inject
-    ItemDao dao;
+    DaoFacade dao;
     
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
