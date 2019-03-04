@@ -2,6 +2,7 @@ package Entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -71,6 +72,11 @@ public class Bid implements Serializable {
     }
 
     public void setAuction(Auction auction) {
+        if (auction == null)
+                throw new IllegalArgumentException("Auction cannot be null");
+        if (this.auction != null)
+            if (!this.auction.equals(auction))
+                throw new IllegalArgumentException("A bid cannot change auction");
         this.auction = auction;
     }
 
@@ -79,7 +85,44 @@ public class Bid implements Serializable {
     }
 
     public void setBidder(Bidder bidder) {
+        if (bidder == null)
+                throw new IllegalArgumentException("Bidder cannot be null");
+        if (this.bidder != null)
+            if (!this.bidder.equals(bidder))
+                throw new IllegalArgumentException("A bid cannot change bidder");
         this.bidder = bidder;
+    }
+    
+    // Misc
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Bid other = (Bid) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Bid{" + "amount=" + amount + ", timeOfBid=" + timeOfBid + ", id=" + id + '}';
     }
     
     

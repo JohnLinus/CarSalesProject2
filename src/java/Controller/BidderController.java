@@ -4,7 +4,6 @@ import Entities.Bid;
 import Entities.Bidder;
 import REST.BidderWrapper;
 import dao.DaoFacade;
-import dao.ItemDao;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.ejb.Stateless;
@@ -14,7 +13,11 @@ import javax.inject.Inject;
 public class BidderController {
     
     @Inject
-    DaoFacade dao;
+    private DaoFacade dao;
+    
+    public void setDao(DaoFacade dao) {
+        this.dao = dao;
+    }
     
     public Bidder unwrap(BidderWrapper bw) {
         Bidder b = new Bidder();
@@ -22,7 +25,12 @@ public class BidderController {
         b.setName(bw.getName());
         b.setPhone(bw.getPhone());
         b.setAddress(bw.getAddress());
-        b.setBids(bw.getBids().stream().map(bid -> dao.get(Bid.class, bid)).collect(Collectors.toList()));
+        for (Long bid : bw.getBids()) {
+            b.addBid(dao.get(Bid.class, bid));
+        }
+//        b.setBids(bw.getBids().stream()
+//                .map(bidId -> dao.get(Bid.class, bidId))
+//                .collect(Collectors.toList()));
         
         return b;
     }
