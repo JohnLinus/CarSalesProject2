@@ -94,11 +94,18 @@ public class Bidder implements Serializable {
     }
 
     public List<Bid> getBids() {
+        if (bids == null)
+            bids = new ArrayList<>();
         return bids;
     }
 
     public void setBids(List<Bid> bids) {
         this.bids = bids;
+    }
+
+    @Override
+    public String toString() {
+        return "Bidder{" + "name=" + name + ", phone=" + phone + ", address=" + address + ", bids=" + bids + '}';
     }
     
     

@@ -3,9 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Joaki/Documents/NetBeansProjects/CarSalesProject2/src/java/Entities/Auction.java</file>
             <file>file:/C:/Users/Joaki/Documents/NetBeansProjects/CarSalesProject2/src/java/REST/TestRest.java</file>
             <file>file:/C:/Users/Joaki/Documents/NetBeansProjects/CarSalesProject2/src/java/Entities/Bidder.java</file>
+=======
+            <file>file:/D:/Users/Jocke/Documents/NetBeansProjects/CarSalesProject2/src/java/Entities/Auction.java</file>
+            <file>file:/D:/Users/Jocke/Documents/NetBeansProjects/CarSalesProject2/test/Entities/AuctionTest.java</file>
+            <file>file:/D:/Users/Jocke/Documents/NetBeansProjects/CarSalesProject2/test/Controller/BidderControllerTest.java</file>
+            <file>file:/D:/Users/Jocke/Documents/NetBeansProjects/CarSalesProject2/test/Entities/BidderTest.java</file>
+            <file>file:/D:/Users/Jocke/Documents/NetBeansProjects/CarSalesProject2/test/Entities/CarTest.java</file>
+            <file>file:/D:/Users/Jocke/Documents/NetBeansProjects/CarSalesProject2/test/Controller/AuctionControllerTest.java</file>
+            <file>file:/D:/Users/Jocke/Documents/NetBeansProjects/CarSalesProject2/src/java/Entities/Bid.java</file>
+            <file>file:/D:/Users/Jocke/Documents/NetBeansProjects/CarSalesProject2/test/Controller/CarControllerTest.java</file>
+            <file>file:/D:/Users/Jocke/Documents/NetBeansProjects/CarSalesProject2/src/java/Entities/Bidder.java</file>
+            <file>file:/D:/Users/Jocke/Documents/NetBeansProjects/CarSalesProject2/src/java/Controller/AuctionController.java</file>
+            <file>file:/D:/Users/Jocke/Documents/NetBeansProjects/CarSalesProject2/src/java/dao/ItemDao.java</file>
+            <file>file:/D:/Users/Jocke/Documents/NetBeansProjects/CarSalesProject2/test/Entities/BidTest.java</file>
+>>>>>>> 98a9086bf092eaf1263ffb9360fcc871358eeb9e
         </group>
     </open-files>
 </project-private>

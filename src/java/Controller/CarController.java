@@ -1,7 +1,9 @@
 package Controller;
 
 import Entities.Car;
-import dao.CarDao;
+import Entities.CarSize;
+import dao.DaoFacade;
+import dao.ItemDao;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -13,13 +15,27 @@ public class CarController implements Serializable {
     public CarController() {}
     
     @Inject
-    CarDao dao;
+    DaoFacade dao;
     
     public void add(Car car) {
         dao.create(car);
     }
-    
     public List<Car> getCars() {
-        return dao.getAll();
+        return dao.getAll(Car.class);
+    }
+    public List<Car> getByHasAuction(boolean hasAuction) {
+        return dao.getCarByHasAuction(hasAuction);
+    }
+    public List<Car> getByManufactureYear(int min, int max) {
+        return dao.getCarByManufactureYear(min, max);
+    }
+    public List<Car> getByManufacturer(String manufacturer) {
+        return dao.getCarByManufacturer(manufacturer);
+    }
+    public List<Car> getByModel(String model) {
+        return dao.getCarByModel(model);
+    }
+    public List<Car> getbySize(CarSize size) {
+        return dao.getCarBySize(size);
     }
 }

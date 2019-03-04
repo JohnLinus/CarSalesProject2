@@ -2,8 +2,7 @@ package Controller;
 
 import Entities.Car;
 import Entities.CarSize;
-import dao.CarDao;
-import dao.ItemDao;
+import dao.DaoFacade;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -24,7 +23,7 @@ public class WebCarController {
     
 
     @Inject
-    ItemDao dao;
+    DaoFacade dao;
     
     
     public void submit() {
@@ -56,19 +55,6 @@ public class WebCarController {
         dao.delete(car);
     }
     
-    public List<Car> getAllBySize(CarSize size){
-        return dao.getCarBySize(size);
-    }
-    public List<Car> getAllByModel(String model){
-        return dao.getCarByModel(model);
-    }
-    public List<Car> getAllByManufacturer(String manufacturer){
-        return dao.getCarByManufacturer(manufacturer);
-    }
-    public List<Car> getAllByManufactureYear(int min, int max){
-        return dao.getCarByManufactureYear(min, max);
-    }
-
     public List<Car> getCars() {
         return cars;
     }

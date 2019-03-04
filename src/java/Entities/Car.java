@@ -22,7 +22,7 @@ public class Car implements Serializable {
     private Integer manufactureYear;
     private CarSize size;
 
-    @OneToOne(optional = true)
+    @OneToOne
     private Auction auction;
     
     public Car() {}

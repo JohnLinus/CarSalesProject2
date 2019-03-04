@@ -1,5 +1,6 @@
 package Entities;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,14 +13,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @IdClass(BidPK.class)
-public class Bid {
+public class Bid implements Serializable {
     
     private int amount;
     private LocalDateTime timeOfBid;
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
     
     @Id
     @ManyToOne
@@ -39,10 +40,15 @@ public class Bid {
 
     
     
-    
-    
-    
     // Getters and Setters
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public int getAmount() {
         return amount;
