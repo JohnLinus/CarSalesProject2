@@ -30,16 +30,18 @@ public class TestRest {
     @Produces(MediaType.APPLICATION_JSON)
 //    @Produces(MediaType.APPLICATION_XML)
 //    @Consumes(MediaType.APPLICATION_JSON)
-    public void test() {
+    public Bidder test() {
         
         dao.create(new Car("test", 9000, "test2", 1999, CarSize.MINI));
         dao.create(new Bidder("test1", "test2", "test3"));
-        dao.create(new Auction(LocalDateTime.MIN, 1000, dao.get(Car.class, 1L)));
+        dao.create(new Auction(LocalDateTime.now().plusDays(7), 1000, dao.get(Car.class, 1L)));
         
         Auction a = dao.get(Auction.class, 3L);
         Bidder b = dao.get(Bidder.class, 2L);
         Car c = dao.get(Car.class, 1L);
         bid(a, b, 100);
+//        b.setBids(null);
+        return b;
     }
     
     private void bid(Auction a, Bidder u, int amount) {

@@ -24,7 +24,7 @@ public class Bidder implements Serializable {
     private String address;
     
     @OneToMany(fetch = FetchType.LAZY)
-    private List<Bid> bids;
+    private List<Bid> bids = new ArrayList<>();
     
     public Bidder(){}
 
